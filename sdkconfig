@@ -343,6 +343,45 @@ CONFIG_PARTITION_TABLE_MD5=y
 # Example Configuration
 #
 CONFIG_EXAMPLE_WIFI_CONNECTION_MAXIMUM_RETRY=2
+
+#
+# Hardware Selection
+#
+CONFIG_HWV1=y
+# end of Hardware Selection
+
+#
+# Firmware Selection
+#
+CONFIG_PRODUCT_FW=y
+CONFIG_AURA_ANCHOR_GW=y
+
+#
+# Version
+#
+CONFIG_FIRMWARE_VERSION_MAJOR=1
+CONFIG_FIRMWARE_VERSION_MINOR=0
+CONFIG_FIRMWARE_VERSION_REVISION=0
+# end of Version
+# end of Firmware Selection
+
+#
+# Firmware Upgrade
+#
+CONFIG_DEFAULT_FIRMWARE_UPGRADE_URI="https://url:port/path"
+CONFIG_DEFAULT_FIRMWARE_UPGRADE_AUTH_USER="tecnologia"
+CONFIG_DEFAULT_FIRMWARE_UPGRADE_AUTH_PASSWORD="128Parsecs!"
+CONFIG_DEFAULT_FIRMWARE_UPGRADE_ATTEMPTS=3
+CONFIG_DEFAULT_FIRMWARE_UPGRADE_TIMEOUT=120
+# end of Firmware Upgrade
+
+#
+# Remote Access
+#
+CONFIG_BROKER_URL="mqtts://uri:port"
+CONFIG_CLIENT_USERNAME="aaaaaaaaaaaaaa"
+CONFIG_CLIENT_PASSWORD="bbbbbbbbbbbbbb"
+# end of Remote Access
 # end of Example Configuration
 
 #
@@ -681,9 +720,9 @@ CONFIG_ADC_CAL_LUT_ENABLE=y
 # SPI Configuration
 #
 # CONFIG_SPI_MASTER_IN_IRAM is not set
-CONFIG_SPI_MASTER_ISR_IN_IRAM=y
+# CONFIG_SPI_MASTER_ISR_IN_IRAM is not set
 # CONFIG_SPI_SLAVE_IN_IRAM is not set
-CONFIG_SPI_SLAVE_ISR_IN_IRAM=y
+# CONFIG_SPI_SLAVE_ISR_IN_IRAM is not set
 # end of SPI Configuration
 
 #
@@ -954,7 +993,7 @@ CONFIG_RTC_CLK_CAL_CYCLES=1024
 #
 # Peripheral Control
 #
-CONFIG_PERIPH_CTRL_FUNC_IN_IRAM=y
+# CONFIG_PERIPH_CTRL_FUNC_IN_IRAM is not set
 # end of Peripheral Control
 
 #
@@ -1314,8 +1353,6 @@ CONFIG_HAL_ASSERTION_EQUALS_SYSTEM=y
 # CONFIG_HAL_ASSERTION_SILENT is not set
 # CONFIG_HAL_ASSERTION_ENABLE is not set
 CONFIG_HAL_DEFAULT_ASSERTION_LEVEL=2
-CONFIG_HAL_SPI_MASTER_FUNC_IN_IRAM=y
-CONFIG_HAL_SPI_SLAVE_FUNC_IN_IRAM=y
 # end of Hardware Abstraction Layer (HAL) and Low Level (LL)
 
 #

@@ -4413,6 +4413,231 @@
                 ],
                 "title": "WiFi connection maximum retry",
                 "type": "int"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice HARDWARE>",
+                                "help": "Hw Version 1.",
+                                "id": "HWV1",
+                                "name": "HWV1",
+                                "range": null,
+                                "title": "Version 1",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "This helps to choose the hardware",
+                        "id": "example-configuration-hardware-selection-hardware",
+                        "name": "HARDWARE",
+                        "title": "Hardware",
+                        "type": "choice"
+                    }
+                ],
+                "depends_on": null,
+                "id": "example-configuration-hardware-selection",
+                "title": "Hardware Selection",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice TYPE>",
+                                "help": "Normal product firmware.",
+                                "id": "PRODUCT_FW",
+                                "name": "PRODUCT_FW",
+                                "range": null,
+                                "title": "Normal product firmware",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": null,
+                        "help": "This helps to choose the firmware type",
+                        "id": "example-configuration-firmware-selection-type",
+                        "name": "TYPE",
+                        "title": "Type",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": "<choice PRODUCT>",
+                                "help": "Aura Anchor-Gateway",
+                                "id": "AURA_ANCHOR_GW",
+                                "name": "AURA_ANCHOR_GW",
+                                "range": null,
+                                "title": "Aura Anchor-Gateway",
+                                "type": "bool"
+                            }
+                        ],
+                        "depends_on": "PRODUCT_FW",
+                        "help": "This helps to choose the product",
+                        "id": "example-configuration-firmware-selection-product",
+                        "name": "PRODUCT",
+                        "title": "Product",
+                        "type": "choice"
+                    },
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Major byte of firmware version.",
+                                "id": "FIRMWARE_VERSION_MAJOR",
+                                "name": "FIRMWARE_VERSION_MAJOR",
+                                "range": [
+                                    1,
+                                    255
+                                ],
+                                "title": "Major",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Minor byte of firmware version.",
+                                "id": "FIRMWARE_VERSION_MINOR",
+                                "name": "FIRMWARE_VERSION_MINOR",
+                                "range": [
+                                    0,
+                                    255
+                                ],
+                                "title": "Major",
+                                "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Revision byte of firmware version.",
+                                "id": "FIRMWARE_VERSION_REVISION",
+                                "name": "FIRMWARE_VERSION_REVISION",
+                                "range": [
+                                    0,
+                                    255
+                                ],
+                                "title": "Revision",
+                                "type": "int"
+                            }
+                        ],
+                        "depends_on": null,
+                        "id": "example-configuration-firmware-selection-version",
+                        "title": "Version",
+                        "type": "menu"
+                    }
+                ],
+                "depends_on": null,
+                "id": "example-configuration-firmware-selection",
+                "title": "Firmware Selection",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "URI of the new firmware image.",
+                        "id": "DEFAULT_FIRMWARE_UPGRADE_URI",
+                        "name": "DEFAULT_FIRMWARE_UPGRADE_URI",
+                        "range": null,
+                        "title": "Firmware upgrade URI",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Default upgrade user for authentication.",
+                        "id": "DEFAULT_FIRMWARE_UPGRADE_AUTH_USER",
+                        "name": "DEFAULT_FIRMWARE_UPGRADE_AUTH_USER",
+                        "range": null,
+                        "title": "Default upgrade user for authentication",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Default upgrade password for authentication.",
+                        "id": "DEFAULT_FIRMWARE_UPGRADE_AUTH_PASSWORD",
+                        "name": "DEFAULT_FIRMWARE_UPGRADE_AUTH_PASSWORD",
+                        "range": null,
+                        "title": "Default upgrade password for authentication",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Number of attempts to upgrade.",
+                        "id": "DEFAULT_FIRMWARE_UPGRADE_ATTEMPTS",
+                        "name": "DEFAULT_FIRMWARE_UPGRADE_ATTEMPTS",
+                        "range": [
+                            1,
+                            255
+                        ],
+                        "title": "Number of attempts to upgrade",
+                        "type": "int"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Timeout to upgrade in seconds (each attempt).",
+                        "id": "DEFAULT_FIRMWARE_UPGRADE_TIMEOUT",
+                        "name": "DEFAULT_FIRMWARE_UPGRADE_TIMEOUT",
+                        "range": [
+                            60,
+                            65535
+                        ],
+                        "title": "Timeout to upgrade in seconds (each attempt)",
+                        "type": "int"
+                    }
+                ],
+                "depends_on": null,
+                "id": "example-configuration-firmware-upgrade",
+                "title": "Firmware Upgrade",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "URL of an mqtt broker.",
+                        "id": "BROKER_URL",
+                        "name": "BROKER_URL",
+                        "range": null,
+                        "title": "MQTT Broker URL",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Client Username.",
+                        "id": "CLIENT_USERNAME",
+                        "name": "CLIENT_USERNAME",
+                        "range": null,
+                        "title": "Client Username",
+                        "type": "string"
+                    },
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": "Client Password.",
+                        "id": "CLIENT_PASSWORD",
+                        "name": "CLIENT_PASSWORD",
+                        "range": null,
+                        "title": "Client Password",
+                        "type": "string"
+                    }
+                ],
+                "depends_on": null,
+                "id": "example-configuration-remote-access",
+                "title": "Remote Access",
+                "type": "menu"
             }
         ],
         "depends_on": null,

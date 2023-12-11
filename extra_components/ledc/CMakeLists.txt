@@ -8,7 +8,7 @@ idf_component_register( SRCS            "ledc_main.c"
                                         esp_netif
                                         esp_wifi
                                         driver
-                                        #mqtt
+                                        mqtts
                                         status
-                                        #config
+                                        config
 )                   

@@ -1,0 +1,44 @@
+-- Found Git: /usr/bin/git (found version "2.34.1") 
+-- The C compiler identification is GNU 12.2.0
+-- The CXX compiler identification is GNU 12.2.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /home/santos/.espressif/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/bin/xtensa-esp32-elf-gcc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /home/santos/.espressif/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/bin/xtensa-esp32-elf-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/santos/.espressif/tools/xtensa-esp32-elf/esp-12.2.0_20230208/xtensa-esp32-elf/bin/xtensa-esp32-elf-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Building ESP-IDF components for target esp32
+-- Project sdkconfig file /home/santos/Documentos/blufi/sdkconfig
+Loading defaults file /home/santos/Documentos/blufi/sdkconfig.defaults...
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of time_t
+-- Check size of time_t - done
+-- Found Python3: /home/santos/.espressif/python_env/idf5.1_py3.10_env/bin/python (found version "3.10.12") found components: Interpreter 
+-- Performing Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS
+-- Performing Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS - Success
+-- App "warehouse_anchor_esp" version: d75ad6e-dirty
+-- Adding linker script /home/santos/Documentos/blufi/build/esp-idf/esp_system/ld/memory.ld
+-- Adding linker script /home/santos/esp/esp-idf/components/esp_system/ld/esp32/sections.ld.in
+-- Adding linker script /home/santos/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.ld
+-- Adding linker script /home/santos/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.api.ld
+-- Adding linker script /home/santos/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.libgcc.ld
+-- Adding linker script /home/santos/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.newlib-data.ld
+-- Adding linker script /home/santos/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.syscalls.ld
+-- Adding linker script /home/santos/esp/esp-idf/components/esp_rom/esp32/ld/esp32.rom.newlib-funcs.ld
+-- Adding linker script /home/santos/esp/esp-idf/components/soc/esp32/ld/esp32.peripherals.ld
+-- Components: app_trace app_update blufi bootloader bootloader_support bt button cmock config console cxx driver dwm1001 efuse esp-tls esp_adc esp_app_format esp_coex esp_common esp_eth esp_event esp_gdbstub esp_hid esp_http_client esp_http_server esp_https_ota esp_https_server esp_hw_support esp_lcd esp_local_ctrl esp_mm esp_netif esp_netif_stack esp_partition esp_phy esp_pm esp_psram esp_ringbuf esp_rom esp_system esp_timer esp_wifi espcoredump esptool_py fatfs freertos hal heap http_parser idf_test ieee802154 json json_messages ledc log lwip main mbedtls mqtt mqtts newlib nvs_flash openthread ota partition_table perfmon protobuf-c protocomm pthread sdmmc sntp soc spi_flash spiffs status storage tcp_transport ulp unity usb vfs wear_levelling wifi_provisioning wpa_supplicant xtensa
+-- Component paths: /home/santos/esp/esp-idf/components/app_trace /home/santos/esp/esp-idf/components/app_update /home/santos/Documentos/blufi/extra_components/blufi /home/santos/esp/esp-idf/components/bootloader /home/santos/esp/esp-idf/components/bootloader_support /home/santos/esp/esp-idf/components/bt /home/santos/Documentos/blufi/extra_components/button /home/santos/esp/esp-idf/components/cmock /home/santos/Documentos/blufi/extra_components/config /home/santos/esp/esp-idf/components/console /home/santos/esp/esp-idf/components/cxx /home/santos/esp/esp-idf/components/driver /home/santos/Documentos/blufi/extra_components/dwm1001 /home/santos/esp/esp-idf/components/efuse /home/santos/esp/esp-idf/components/esp-tls /home/santos/esp/esp-idf/components/esp_adc /home/santos/esp/esp-idf/components/esp_app_format /home/santos/esp/esp-idf/components/esp_coex /home/santos/esp/esp-idf/components/esp_common /home/santos/esp/esp-idf/components/esp_eth /home/santos/esp/esp-idf/components/esp_event /home/santos/esp/esp-idf/components/esp_gdbstub /home/santos/esp/esp-idf/components/esp_hid /home/santos/esp/esp-idf/components/esp_http_client /home/santos/esp/esp-idf/components/esp_http_server /home/santos/esp/esp-idf/components/esp_https_ota /home/santos/esp/esp-idf/components/esp_https_server /home/santos/esp/esp-idf/components/esp_hw_support /home/santos/esp/esp-idf/components/esp_lcd /home/santos/esp/esp-idf/components/esp_local_ctrl /home/santos/esp/esp-idf/components/esp_mm /home/santos/esp/esp-idf/components/esp_netif /home/santos/esp/esp-idf/components/esp_netif_stack /home/santos/esp/esp-idf/components/esp_partition /home/santos/esp/esp-idf/components/esp_phy /home/santos/esp/esp-idf/components/esp_pm /home/santos/esp/esp-idf/components/esp_psram /home/santos/esp/esp-idf/components/esp_ringbuf /home/santos/esp/esp-idf/components/esp_rom /home/santos/esp/esp-idf/components/esp_system /home/santos/esp/esp-idf/components/esp_timer /home/santos/esp/esp-idf/components/esp_wifi /home/santos/esp/esp-idf/components/espcoredump /home/santos/esp/esp-idf/components/esptool_py /home/santos/esp/esp-idf/components/fatfs /home/santos/esp/esp-idf/components/freertos /home/santos/esp/esp-idf/components/hal /home/santos/esp/esp-idf/components/heap /home/santos/esp/esp-idf/components/http_parser /home/santos/esp/esp-idf/components/idf_test /home/santos/esp/esp-idf/components/ieee802154 /home/santos/esp/esp-idf/components/json /home/santos/Documentos/blufi/extra_components/json_messages /home/santos/Documentos/blufi/extra_components/ledc /home/santos/esp/esp-idf/components/log /home/santos/esp/esp-idf/components/lwip /home/santos/Documentos/blufi/main /home/santos/esp/esp-idf/components/mbedtls /home/santos/esp/esp-idf/components/mqtt /home/santos/Documentos/blufi/extra_components/mqtts /home/santos/esp/esp-idf/components/newlib /home/santos/esp/esp-idf/components/nvs_flash /home/santos/esp/esp-idf/components/openthread /home/santos/Documentos/blufi/extra_components/ota /home/santos/esp/esp-idf/components/partition_table /home/santos/esp/esp-idf/components/perfmon /home/santos/esp/esp-idf/components/protobuf-c /home/santos/esp/esp-idf/components/protocomm /home/santos/esp/esp-idf/components/pthread /home/santos/esp/esp-idf/components/sdmmc /home/santos/Documentos/blufi/extra_components/sntp /home/santos/esp/esp-idf/components/soc /home/santos/esp/esp-idf/components/spi_flash /home/santos/esp/esp-idf/components/spiffs /home/santos/Documentos/blufi/extra_components/status /home/santos/Documentos/blufi/extra_components/storage /home/santos/esp/esp-idf/components/tcp_transport /home/santos/esp/esp-idf/components/ulp /home/santos/esp/esp-idf/components/unity /home/santos/esp/esp-idf/components/usb /home/santos/esp/esp-idf/components/vfs /home/santos/esp/esp-idf/components/wear_levelling /home/santos/esp/esp-idf/components/wifi_provisioning /home/santos/esp/esp-idf/components/wpa_supplicant /home/santos/esp/esp-idf/components/xtensa
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/santos/Documentos/blufi/build

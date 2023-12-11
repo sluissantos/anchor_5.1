@@ -11,8 +11,8 @@ idf_component_register( SRCS            "main.c"
                                         console
                                         bt
                                         blufi
-                                        #mqtts
-                                        #sntp
+                                        mqtts
+                                        sntp
                                         status
                                         ledc
                                         config

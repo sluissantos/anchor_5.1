@@ -11,9 +11,10 @@ idf_component_register( SRCS            "config.c"
                                         esp_hw_support
                                         blufi
                                         bt
-                                        #ota
+                                        ota
                                         log
                                         esp_wifi
                                         status
                                         app_update
+                                        esp_netif
 )                           

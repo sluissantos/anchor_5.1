@@ -131,16 +131,13 @@ static void led_delete_xHandle(void){
 		xSemaphoreGive(B_led_cmd.semaphore);
 		B_led_cmd.xHandle=NULL;
 	}
-
 	R_led_cmd.initial_state = LED_ON;
 	B_led_cmd.initial_state = LED_ON;
 }
 
 void led_handler(uint8_t led_state){
-
 	led_delete_xHandle();
 	led_color_blink_ledc = getLedColorBlink();
-
 	switch(led_state){
 		case LED_WIFI_CONNECTED:
 			ESP_LOGI(TAG,"LED_WIFI_CONNECTED");
@@ -261,6 +258,7 @@ void led_handler(uint8_t led_state){
 					xTaskCreatePinnedToCore(ledc_task, "ledc_task_B", LED_STACK_SIZE, &B_led_cmd, LED_PRIORITY_TASK, &B_led_cmd.xHandle, LEDC_CPU_SELECT);
 					led_off(LED_B);
 					break;
+
 				case LED_BLINK_LOCAL_NETWORK:
 					ESP_LOGI(TAG,"LED_DATA_BLINK_LOCAL");
 					led_off(LED_R);
@@ -268,6 +266,7 @@ void led_handler(uint8_t led_state){
 					B_led_cmd.time=LEDC_FADE_TIME_ULTRA_FAST;
 					xTaskCreatePinnedToCore(ledc_task, "ledc_task_B", LED_STACK_SIZE, &B_led_cmd, LED_PRIORITY_TASK, &B_led_cmd.xHandle, LEDC_CPU_SELECT);
 					break;
+					
 				case LED_BLINK_REMOTE_NETWORK:
 					ESP_LOGI(TAG,"LED_DATA_BLINK_REMOTE");
 					led_off(LED_R);
@@ -285,7 +284,7 @@ void led_handler(uint8_t led_state){
 	}
 }
 
-void led_init(void) {
+void led_init(void){
 	led_color_blink_ledc = getLedColorBlink();
 	status_event_group_ledc = getStatusEventGroup();
 	ledc_timer_config_t ledc_timer = {
@@ -300,14 +299,14 @@ void led_init(void) {
 
 	ledc[LED_R].channel = LEDC_CHANNEL_0;
 	ledc[LED_R].duty = 0;
-	ledc[LED_R].gpio_num = 25;
+	ledc[LED_R].gpio_num = RED_LED_PIN;
 	ledc[LED_R].speed_mode = MODE;
 	ledc[LED_R].hpoint = 0;
 	ledc[LED_R].timer_sel = TIMER;
 
 	ledc[LED_B].channel = LEDC_CHANNEL_1;
 	ledc[LED_B].duty = 0;
-	ledc[LED_B].gpio_num = 27;
+	ledc[LED_B].gpio_num = BLUE_LED_PIN;
 	ledc[LED_B].speed_mode = MODE;
 	ledc[LED_B].hpoint = 0;
 	ledc[LED_B].timer_sel = TIMER;

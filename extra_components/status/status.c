@@ -140,7 +140,9 @@ void status_event_group_init(void){
 		ESP_LOGE(TAG, "STATUS event group failed!");
 	}
 	else{
-		xTaskCreatePinnedToCore(status_task, "status_task", (1024*5), NULL, 0, &commStatusTask_handler, 0);
+		xTaskCreatePinnedToCore(status_task, "status_task", (1024*2), NULL, 0, &commStatusTask_handler, 0);
+		//ESP_LOGI(TAG, "ENTROU AQUI");
+		//uxTaskGetStackHighWaterMark(NULL);
 	}
 }
 
@@ -154,4 +156,8 @@ EventBits_t getLastStatusEventBits(){
 
 uint8_t getLedColorBlink(){
 	return led_color_blink;
+}
+
+uint32_t getStatus(){
+	return status;
 }

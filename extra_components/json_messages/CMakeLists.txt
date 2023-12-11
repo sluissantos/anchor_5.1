@@ -8,8 +8,9 @@ idf_component_register( SRCS            "json_messages.c"
                                         esp_netif
                                         esp_wifi
                                         driver
-                                        #mqtt
+                                        mqtts
                                         dwm1001
                                         json
                                         ota
+                                        sntp
 )                   

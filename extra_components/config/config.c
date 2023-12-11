@@ -18,10 +18,12 @@
 #include "build_defs.h"
 #include "blufi_example.h"
 #include "config.h"
-//#include "https_ota.h"
+#include "https_ota.h"
 #include "esp_ota_ops.h"
 #include "status.h"
 #include "esp_mac.h"
+
+#include "esp_netif.h"
 
 #define TAG "CONFIG"
 
@@ -90,29 +92,31 @@ esp_err_t config_base_mac(void){
 	return err;
 }
 
-esp_err_t config_hostname(void){
-	esp_err_t err = NULL;
-	/*
-	char hostname[64];
+esp_err_t config_hostname(void) {
+    esp_err_t err;
+    char hostname[64];
 
-	if(factory_config.mem_read_err == ESP_OK){
-    uint8_t wifi_sta_mac_addr[6];
-	err = esp_wifi_get_mac(ESP_IF_WIFI_STA, wifi_sta_mac_addr);
-		//HOSTNAME:
-		ESP_LOGI(TAG, "Writing Hostname ... ");
-		sprintf(hostname,""HOSTNAME_PREFIX_WIFI"-%02X%02X%02X",wifi_sta_mac_addr[3],wifi_sta_mac_addr[4],wifi_sta_mac_addr[5]);
-		err = tcpip_adapter_set_hostname(TCPIP_ADAPTER_IF_STA, hostname);
-		if (err != ESP_OK) {
-			ESP_LOGE(TAG, "Error (%s) setting Hostname", esp_err_to_name(err));
-			return err;
-		}
-	}
-	else {
-		return factory_config.mem_read_err;
-	}
-	*/
-	ESP_LOGI("CONFIG", "REMOVEU AQUI");
-	return err;
+    if (factory_config.mem_read_err == ESP_OK) {
+        uint8_t wifi_sta_mac_addr[6];
+        err = esp_wifi_get_mac(ESP_IF_WIFI_STA, wifi_sta_mac_addr);
+
+        // HOSTNAME:
+        ESP_LOGI(TAG, "Writing Hostname ... ");
+        sprintf(hostname, ""HOSTNAME_PREFIX_WIFI"-%02X%02X%02X", wifi_sta_mac_addr[3], wifi_sta_mac_addr[4], wifi_sta_mac_addr[5]);
+
+        esp_netif_config_t netif_config = ESP_NETIF_DEFAULT_WIFI_STA();
+        esp_netif_t *sta_netif = esp_netif_create_default_wifi_sta();
+        err = esp_netif_set_hostname(sta_netif, hostname);
+
+        if (err != ESP_OK) {
+            ESP_LOGE(TAG, "Error (%s) setting Hostname", esp_err_to_name(err));
+            return err;
+        }
+    } else {
+        return factory_config.mem_read_err;
+    }
+
+    return err;
 }
 
 esp_err_t factory_init_data(void){
@@ -290,7 +294,7 @@ esp_err_t config_load(void){
 	const esp_partition_t *running = esp_ota_get_running_partition();
 
 	if (esp_ota_get_partition_description(running, &running_app_info) == ESP_OK) {
-			//ESP_LOGI(TAG, "\r\nProject name: %s\r\nProduct name: %s (id:%d)\r\nFirmware version: %d.%d.%d\r\nCommit: %s\r\nDatetime: %s,%s\r\nIDF version: %s\r\nPartition name: %s\r\nEncrypted:%d", running_app_info.project_name, HOSTNAME_PREFIX, CONFIG_PRODUCT_ID, CONFIG_FIRMWARE_VERSION_MAJOR,CONFIG_FIRMWARE_VERSION_MINOR,CONFIG_FIRMWARE_VERSION_REVISION, running_app_info.version,running_app_info.date,running_app_info.time,running_app_info.idf_ver, running->label,running->encrypted);
+		ESP_LOGI(TAG, "\r\nProject name: %s\r\nProduct name: %s (id:%d)\r\nFirmware version: %d.%d.%d\r\nCommit: %s\r\nDatetime: %s,%s\r\nIDF version: %s\r\nPartition name: %s\r\nEncrypted:%d", running_app_info.project_name, HOSTNAME_PREFIX, CONFIG_PRODUCT_ID, CONFIG_FIRMWARE_VERSION_MAJOR,CONFIG_FIRMWARE_VERSION_MINOR,CONFIG_FIRMWARE_VERSION_REVISION, running_app_info.version,running_app_info.date,running_app_info.time,running_app_info.idf_ver, running->label,running->encrypted);
 	}
 
 //	const esp_app_desc_t* running_app_info = esp_ota_get_app_description();

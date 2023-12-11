@@ -48,9 +48,9 @@
 
 #define RELAY_PIN 4
 
-#define DEFAULT_SSID "26355530000146"
-#define DEFAULT_PASSWORD "+553130163193"
-#define DEFAULT_BROKER_URI "mqtt://192.168.15.124:1883"
+#define DEFAULT_SSID "tecnologia"
+#define DEFAULT_PASSWORD "128Parsecs!"
+#define DEFAULT_BROKER_URI "mqtt://gwqa.revolog.com.br:1883"
 #define DEFAULT_BROKER_USER " "
 #define DEFAULT_BROKER_PWD " "
 

@@ -16,12 +16,12 @@
 #include "ledc_headers.h"
 #include "https_ota.h"
 #include "esp_mac.h"
+#include "blufi_example.h"
 static const char *TAG = "HTTPS OTA";
 
 extern const uint8_t root_ca_pem_start[] asm("_binary_root_ca_pem_start");
 extern const uint8_t root_ca_pem_end[] asm("_binary_root_ca_pem_end");
 
-extern EventGroupHandle_t wifi_event_group;
 EventGroupHandle_t status_event_group_https;
 struct nvs_data_t nvs_data_https;
 extern const int CONNECTED_BIT;
@@ -75,8 +75,7 @@ static void ota_timeout_cb ( TimerHandle_t xTimer )
 }
 
 #define DEFAULT_OTA_TIMEOUT 60000
-static esp_err_t esp_https_ota_process(const esp_http_client_config_t *config, uint32_t ota_timeout)
-{
+static esp_err_t esp_https_ota_process(const esp_http_client_config_t *config, uint32_t ota_timeout){
     if (!config) {
         ESP_LOGE(TAG, "esp_http_client config not found");
         return ESP_ERR_INVALID_ARG;
@@ -130,15 +129,14 @@ static esp_err_t esp_https_ota_process(const esp_http_client_config_t *config, u
 
 static void ota_task(void * pvParameter){
 	size_t size;
-	nvs_handle config_handle;
+	nvs_handle_t config_handle;
 	char * cert_str = NULL;
 
 	struct fw_update_t * fw_update = (struct fw_update_t *)pvParameter;
 
 	ESP_LOGI(TAG, "Starting OTA...");
 
-
-    xEventGroupWaitBits(wifi_event_group, CONNECTED_BIT,false, true, portMAX_DELAY);
+    xEventGroupWaitBits(getWifiEventGroup(), CONNECTED_BIT,false, true, portMAX_DELAY);
 
     if(status_event_group_https != NULL)
         xEventGroupSetBits(status_event_group_https, STATUS_FWUPDATE_BIT);
@@ -158,39 +156,35 @@ static void ota_task(void * pvParameter){
 
     //Pra não expor a senha Default, ela só será usada se estiver em HTTPS:
     esp_http_client_config_t config;
-    if((fw_update->http_auth_type==HTTP_AUTH_TYPE_BASIC || fw_update->http_auth_type==HTTP_AUTH_TYPE_DIGEST) && (fw_update->protocol == HTTPS))
-    {
+    if((fw_update->http_auth_type==HTTP_AUTH_TYPE_BASIC || fw_update->http_auth_type==HTTP_AUTH_TYPE_DIGEST) && (fw_update->protocol == HTTPS)){
+        config = (esp_http_client_config_t){
+                .url = fw_update->url,
+                .event_handler = _http_event_handler,
+                .timeout_ms = 10000,
+                .username=(const char *)fw_update->http_user,
+                .password=(const char *)fw_update->http_pass,
+                .auth_type= fw_update->http_auth_type,//É possível usar Basic Auth ou Digest ou None
 
-
-    config = (esp_http_client_config_t){
-			.url = fw_update->url,
-            .event_handler = _http_event_handler,
-			.timeout_ms = 10000,
-			.username=(const char *)fw_update->http_user,
-			.password=(const char *)fw_update->http_pass,
-			.auth_type= fw_update->http_auth_type,//É possível usar Basic Auth ou Digest ou None
-
-		};
+            };
 		if(strncmp(cert_str,"-----BEGIN CERTIFICATE-----",27)==0) {
 			ESP_LOGI(TAG,"Certificate inside NVS");
 			config.cert_pem = (char *)cert_str;
 		}
 		else config.cert_pem = (const char *)root_ca_pem_start;
-        ESP_LOGI(TAG, "Authenticated Mode:\r\nURL: %s\r\nProtocol: HTTPS\r\nAuth Type: %d\r\nUser: %s\r\nPass:%s", config.url, config.auth_type, config.username, config.password);
+            ESP_LOGI(TAG, "Authenticated Mode:\r\nURL: %s\r\nProtocol: HTTPS\r\nAuth Type: %d\r\nUser: %s\r\nPass:%s", config.url, config.auth_type, config.username, config.password);
     }
-    else
-    {
+    else{
     	config = (esp_http_client_config_t){
 			.url = fw_update->url,
 			.event_handler = _http_client_init_cb,
 			.timeout_ms = 60000,
 		};
-		if(strncmp(cert_str,"-----BEGIN CERTIFICATE-----",27)==0) {
+		if(strncmp(cert_str,"-----BEGIN CERTIFICATE-----",27)==0){
 			ESP_LOGI(TAG,"Certificate inside NVS");
 			config.cert_pem = (char *)cert_str;
 		}
 		else config.cert_pem = (char *)root_ca_pem_start;
-		ESP_LOGI(TAG, "No Authenticated Mode:\r\nURL: %s",config.url);
+		    ESP_LOGI(TAG, "No Authenticated Mode:\r\nURL: %s",config.url);
     };
 
     esp_err_t err = ESP_OK;

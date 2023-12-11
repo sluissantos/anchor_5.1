@@ -26,10 +26,10 @@
 #include "ledc_headers.h"
 #include "status.h"
 #include "storage_headers.h"
-//#include "mqtt_headers.h"
+#include "mqtt_headers.h"
 #include "https_ota.h"
 #include "button_headers.h"
-//#include "sntp_headers.h"
+#include "sntp_headers.h"
 #include "dwm1001_main.h"
 #include "esp_system.h"
 
@@ -73,34 +73,28 @@ struct nvs_data_t nvs_data_main;
 
 static esp_err_t bluetooth_init(void){
     esp_err_t ret;
-
     ESP_ERROR_CHECK(esp_bt_controller_mem_release(ESP_BT_MODE_CLASSIC_BT));
-
     esp_bt_controller_config_t bt_cfg = BT_CONTROLLER_INIT_CONFIG_DEFAULT();
     ret = esp_bt_controller_init(&bt_cfg);
     if (ret) {
         ESP_LOGE(TAG, "%s initialize controller failed", __func__);
         return ret;
     }
-
     ret = esp_bt_controller_enable(ESP_BT_MODE_BLE);
     if (ret) {
         ESP_LOGE(TAG, "%s enable controller failed", __func__);
         return ret;
     }
-
     ret = esp_bluedroid_init();
     if (ret) {
         ESP_LOGE(TAG, "%s init bluetooth failed", __func__);
         return ret;
     }
-
     ret = esp_bluedroid_enable();
     if (ret) {
         ESP_LOGE(TAG, "%s enable bluetooth failed", __func__);
         return ret;
     }
-
     return ret;
 }
 
@@ -138,15 +132,13 @@ static esp_err_t bluetooth_deinit(void){
 
 void blufi_deinit_task(void * parm){
     EventBits_t uxBits;
-
-    ESP_LOGI(TAG, "bluefi_deinit task initializing...");
-
-    while (1) {
+    ESP_LOGI(TAG, "blufi_deinit task initializing...");
+    while(1){
         uxBits = xEventGroupWaitBits(bluetooth_deinit_event_group, BLUETOOTH_DEINIT_BIT | BLUETOOTH_MESH_STARTED_BIT, true, false, portMAX_DELAY);
-        if(uxBits & BLUETOOTH_DEINIT_BIT) {
-            ESP_LOGI(TAG, "bluefi_deinit task");
+        if(uxBits & BLUETOOTH_DEINIT_BIT){
+            ESP_LOGI(TAG, "blufi_deinit task");
             esp_err_t err = bluetooth_deinit();
-			if (err) {
+			if(err){
 				ESP_LOGE(TAG, "Bluetooth stop (err %d)", err);
 				return;
 			}
@@ -157,7 +149,7 @@ void blufi_deinit_task(void * parm){
 }
 
 
-void bluefi_deinit_task_init(void){
+void blufi_deinit_task_init(void){
 	bluetooth_deinit_event_group = xEventGroupCreate();
 	xTaskCreate(blufi_deinit_task, "blufi_deinit_task", 1024, NULL, 5, NULL);
 }
@@ -179,16 +171,51 @@ void app_main(void){
 		xSemaphoreTake(init_mux, portMAX_DELAY);
 		button_init();
 		//aura_board_init();
-		//dwm1001_init();
-		//sntp_main_init();
-		//mqtt_init();
-		//xSemaphoreGive(init_mux);
+		dwm1001_init();
+		sntp_main_init();
+		mqtt_init();
+		xSemaphoreGive(init_mux);
 	} else {
-		//xSemaphoreTake(init_mux, portMAX_DELAY);
-		//ota_init(&nvs_data.fw_update_data);
-		//xSemaphoreGive(init_mux);
+		xSemaphoreTake(init_mux, portMAX_DELAY);
+		ota_init(&nvs_data_main.fw_update_data);
+		xSemaphoreGive(init_mux);
 	}
-	
+    xSemaphoreTake(init_mux, portMAX_DELAY);
+	ESP_ERROR_CHECK( esp_wifi_start() );
 
-    //blufi_init();
+    wifi_config_t wifi_cfg;
+    esp_err_t err;
+    err=esp_wifi_get_config(ESP_IF_WIFI_STA, &wifi_cfg);
+    if ( err != ESP_OK) {
+        ESP_LOGE(TAG, "Error getting wifi config (err %d)", err);
+        return;
+    }
+
+    if(strlen((const char*) wifi_cfg.sta.ssid)){
+        ESP_LOGI(TAG, "Found ssid %s, len %d",     (const char*) wifi_cfg.sta.ssid, strlen((const char*)wifi_cfg.sta.ssid));
+        ESP_LOGI(TAG, "Found password %s, len %d", (const char*) wifi_cfg.sta.password, strlen((const char*)wifi_cfg.sta.password));
+        if(strcmp((const char*) wifi_cfg.sta.ssid,DEFAULT_SSID)==0 && strcmp((const char*) wifi_cfg.sta.password,DEFAULT_PASSWORD)==0){
+            err = bluetooth_init();
+            if(err){
+                ESP_LOGE(TAG, "esp32_bluetooth_init failed (err %d)", err);
+                return;
+            }
+            blufi_deinit_task_init();
+            blufi_init();
+        }
+	    else esp_bt_mem_release(ESP_BT_MODE_BTDM);
+    }
+    else ESP_LOGE(TAG, "SSID NOT FOUND!!!");
+    xSemaphoreGive(init_mux);
+
+    #ifdef TASKS_LIST_DEBUG
+        tasks_info();
+    #endif
+
+	#ifdef CONFIG_BOOTLOADER_WDT_DISABLE_IN_USER_CODE
+        while(1){
+            rtc_wdt_feed();
+            vTaskDelay(pdMS_TO_TICKS(4000));
+        }
+	#endif
 }

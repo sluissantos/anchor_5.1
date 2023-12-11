@@ -8,8 +8,8 @@ idf_component_register(SRCS             "blufi_example_main.c"
                                         nvs_flash
                                         freertos
                                         spi_flash
-                                        #status
-                                        #config
+                                        status
+                                        config
                                         esp_wifi
                                         esp_netif
                                         mbedtls

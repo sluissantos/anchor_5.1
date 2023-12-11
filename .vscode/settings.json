@@ -1,0 +1,10 @@
+{
+    "idf.adapterTargetName": "esp32",
+    "idf.flashType": "UART",
+    "idf.port": "/dev/ttyACM0",
+    "files.associations": {
+        "blufi_example.h": "c",
+        "string.h": "c",
+        "status.h": "c"
+    }
+}

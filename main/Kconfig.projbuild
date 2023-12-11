@@ -7,4 +7,128 @@ menu "Example Configuration"
         help
             WiFi connection maximum retry, from 0 to 255.
 
+        menu "Hardware Selection"
+            choice HARDWARE
+                prompt "Hardware"
+                default HWV1
+                help
+                    This helps to choose the hardware
+    
+                config HWV1
+                bool "Version 1"
+                help
+                    Hw Version 1.
+                
+            endchoice
+        endmenu
+        
+        menu "Firmware Selection"
+            choice TYPE
+                prompt "Type"
+                default PRODUCT_FW
+                help
+                    This helps to choose the firmware type
+                    
+                config PRODUCT_FW
+                bool "Normal product firmware"
+                help
+                    Normal product firmware.
+                
+            endchoice
+            
+            choice PRODUCT
+                prompt "Product"
+                depends on PRODUCT_FW
+                default AURA_ANCHOR_GW
+                help
+                    This helps to choose the product
+    
+                config AURA_ANCHOR_GW
+                bool "Aura Anchor-Gateway"
+                help
+                    Aura Anchor-Gateway
+            
+            endchoice
+            
+            menu "Version"
+            config FIRMWARE_VERSION_MAJOR
+                    int "Major"
+                    default 1
+                    range 1 255
+                    help
+                        Major byte of firmware version.
+            
+            config FIRMWARE_VERSION_MINOR
+                    int "Major"
+                    default 0
+                    range 0 255
+                    help
+                        Minor byte of firmware version.
+                        
+                config FIRMWARE_VERSION_REVISION
+                    int "Revision"
+                    default 0
+                    range 0 255
+                    help
+                        Revision byte of firmware version.
+            endmenu
+        endmenu
+            
+        menu "Firmware Upgrade"
+                        
+            config DEFAULT_FIRMWARE_UPGRADE_URI
+                string "Firmware upgrade URI"
+                default "https://revolog.com.br"
+                help
+                    URI of the new firmware image.
+                    
+            config DEFAULT_FIRMWARE_UPGRADE_AUTH_USER
+                string "Default upgrade user for authentication"
+                default "tecnologia"
+                help
+                    Default upgrade user for authentication.
+            
+            config DEFAULT_FIRMWARE_UPGRADE_AUTH_PASSWORD
+                string "Default upgrade password for authentication"
+                default "128Parsecs!"
+                help
+                    Default upgrade password for authentication.
+                    
+            config DEFAULT_FIRMWARE_UPGRADE_ATTEMPTS    
+                int "Number of attempts to upgrade"
+                default 3
+                range 1 255
+                help
+                    Number of attempts to upgrade.
+                    
+            config DEFAULT_FIRMWARE_UPGRADE_TIMEOUT    
+                int "Timeout to upgrade in seconds (each attempt)"
+                default 120
+                range 60 65535
+                help
+                    Timeout to upgrade in seconds (each attempt).
+            
+        endmenu
+        
+        menu "Remote Access"
+    
+            config BROKER_URL
+                string "MQTT Broker URL"
+                default "mqtts://uri:port"
+                help
+                    URL of an mqtt broker.
+        
+            config CLIENT_USERNAME
+                string "Client Username"
+                default "aaaaaaaaaaaaaa"
+                help
+                    Client Username.
+        
+            config CLIENT_PASSWORD
+                string "Client Password"
+                default "bbbbbbbbbbbbbb"
+                help
+                    Client Password.
+        endmenu
+
 endmenu

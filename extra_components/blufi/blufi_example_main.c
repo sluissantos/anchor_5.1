@@ -518,3 +518,7 @@ void blufi_init(void){
 
     BLUFI_INFO("BLUFI VERSION %04x\n", esp_blufi_get_version());
 }
+
+EventGroupHandle_t getWifiEventGroup(){
+    return wifi_event_group;
+}

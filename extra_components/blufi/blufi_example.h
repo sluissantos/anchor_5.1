@@ -8,6 +8,9 @@
 #pragma once
 
 #include "esp_blufi_api.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/event_groups.h"
 
 #define BLUFI_EXAMPLE_TAG "BLUFI_EXAMPLE"
 #define BLUFI_INFO(fmt, ...)   ESP_LOGI(BLUFI_EXAMPLE_TAG, fmt, ##__VA_ARGS__)
@@ -27,6 +30,7 @@ esp_err_t esp_blufi_host_deinit(void);
 
 void blufi_init(void);
 void initialise_wifi(void);
+EventGroupHandle_t getWifiEventGroup(void);
 
 typedef struct {
 
