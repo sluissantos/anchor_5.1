@@ -1,0 +1,37 @@
+# Csv file - max key length is 15
+key,type,encoding,value
+logpyx,namespace,,
+#campos gravados fisicamente ou pelo próprio firmware:
+manufacturer,data,string,Logpyx
+id_plat,data,u16,1
+plat_name,data,string,aura_anchor_gw
+prod_name,data,string,warehouse_anchor
+hw_major,data,u8,1
+hw_minor,data,u8,2
+hw_rev,data,u8,0
+fw_base_major,data,u8,1
+fw_base_minor,data,u8,0
+fw_base_rev,data,u8,7
+wty_datetime,data,u32,0
+test_ok,data,u8,0
+fact_new,data,u8,0
+uwb0,data,u8,1
+uwb1,data,u8,0
+uwb2,data,u8,0
+default_ssid,data,string,Logpyx_Default
+default_pass,data,string,128Parsecs!
+WIFI_SSID,data,string,LogPyx-2.4GHz
+WIFI_PWD,data,string,R3V0L0G&@ur@
+WIFI_AUTH_TYPE,data,u8,0
+
+#dados gravados por mensagem JSON:
+mac,data,string,
+qr_code,data,string,QRCODE CONTENT
+prod_by,data,string,Logpyx
+costumer,data,string,bsk
+proj_id,data,string,stand
+partner,data,string,
+mfg_batch,data,string,JEADHOUSE
+mfg_local,data,string,BH
+mfg_datetime,data,u32,1639401325
+op_name,data,string,Jullierme

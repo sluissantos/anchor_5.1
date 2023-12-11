@@ -1,0 +1,1 @@
+cmd='/usr/bin/cmake;-DSDKCONFIG=/home/santos/Documentos/blufi/sdkconfig;-DIDF_PATH=/home/santos/esp/esp-idf;-DIDF_TARGET=esp32;-DPYTHON_DEPS_CHECKED=1;-DPYTHON=/home/santos/.espressif/python_env/idf5.1_py3.10_env/bin/python;-DEXTRA_COMPONENT_DIRS=/home/santos/esp/esp-idf/components/bootloader;-DPROJECT_SOURCE_DIR=/home/santos/Documentos/blufi;-GNinja;<SOURCE_DIR><SOURCE_SUBDIR>'

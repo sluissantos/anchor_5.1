@@ -1,0 +1,1 @@
+python mfg_gen.py --conf mass_factory_conf.csv --values mass_factory_values.csv --prefix logpyx --size 0x3000

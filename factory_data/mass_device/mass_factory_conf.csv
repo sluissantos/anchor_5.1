@@ -1,0 +1,5 @@
+logpyx,namespace,
+mac,data,hex2bin
+qrcode,data,string
+hw_major,data,u8
+manufacture_year,data,u16
