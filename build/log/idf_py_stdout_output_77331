@@ -145,4 +145,22 @@ I (1437) wifi:enable tsf
 [0;32mI (1437) AURA_ANCHOR_GW: Found password R3V0L0G&@ur@, len 12[0m
 [0;32mI (1447) main_task: Returned from app_main()[0m
 I (1457) wifi:new:<7,0>, old:<1,0>, ap:<255,255>, sta:<7,0>, prof:1
-I 
+I (1457) wifi:state: init -> auth (b0)
+I (1467) wifi:state: auth -> assoc (0)
+I (1487) wifi:state: assoc -> run (10)
+W (1497) wifi:[ADDBA]rx delba, code:39, delete tid:0
+W (1497) wifi:[ADDBA]rx delba, code:39, delete tid:0
+I (1617) wifi:connected with LogPyx-2.4GHz, aid = 9, channel 7, BW20, bssid = d8:c6:78:40:0c:08
+I (1617) wifi:security: WPA2-PSK, phy: bgn, rssi: -72
+I (1627) wifi:pm start, type: 1
+
+I (1687) wifi:<ba-add>idx:0 (ifx:0, d8:c6:78:40:0c:08), tid:0, ssn:3, winSize:64
+I (1697) wifi:AP's beacon interval = 102400 us, DTIM period = 3
+[0;32mI (2527) HAL_SPI: spi_bus_add_device OK[0m
+[0;32mI (2627) esp_netif_handlers: sta ip: 192.168.15.185, mask: 255.255.255.0, gw: 192.168.15.1[0m
+[0;32mI (2627) WIFI: got ip: 192.168.15.185[0m
+[0;32mI (2627) SNTP: SNTP init...[0m
+[0;32mI (2637) MQTTS: MQTT URL: mqtt://192.168.15.124:1883[0m
+[0;33mW (2637) mqtt_client: SSL related configs set, but the URI scheme specifies a non-SSL scheme, scheme = mqtt[0m
+[0;32mI (7217) SNTP: Notification of a time synchronization event![0m
+[0;32mI (7217) SNTP: The current date/time is: Mon Dec 11 19:32:53 2023[0m

@@ -71,8 +71,7 @@ static wifi_sta_list_t gl_sta_list;
 static bool gl_sta_is_connecting = false;
 static esp_blufi_extra_info_t gl_sta_conn_info;
 
-static void example_record_wifi_conn_info(int rssi, uint8_t reason)
-{
+static void example_record_wifi_conn_info(int rssi, uint8_t reason){
     memset(&gl_sta_conn_info, 0, sizeof(esp_blufi_extra_info_t));
     if (gl_sta_is_connecting) {
         gl_sta_conn_info.sta_max_conn_retry_set = true;
@@ -85,8 +84,7 @@ static void example_record_wifi_conn_info(int rssi, uint8_t reason)
     }
 }
 
-static void example_wifi_connect(void)
-{
+static void example_wifi_connect(void){
     example_wifi_retry = 0;
     gl_sta_is_connecting = (esp_wifi_connect() == ESP_OK);
     example_record_wifi_conn_info(EXAMPLE_INVALID_RSSI, EXAMPLE_INVALID_REASON);
