@@ -28,7 +28,7 @@ uint8_t led_color_blink;
   (byte & 0x01 ? '1' : '0')
 */
 
-uint32_t status=0;
+uint16_t status=0;
 
 void status_task(void * parm){
     EventBits_t uxBits;
@@ -158,6 +158,6 @@ uint8_t getLedColorBlink(){
 	return led_color_blink;
 }
 
-uint32_t getStatus(){
+uint16_t getStatus(){
 	return status;
 }

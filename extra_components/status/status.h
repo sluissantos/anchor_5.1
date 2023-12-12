@@ -30,7 +30,7 @@ void status_event_group_init(void);
 EventGroupHandle_t getStatusEventGroup(void);
 EventBits_t getLastStatusEventBits(void);
 uint8_t getLedColorBlink(void);
-uint32_t getStatus(void);
+uint16_t getStatus(void);
 
 enum STATUS {
 	STATUS_RESET=0,

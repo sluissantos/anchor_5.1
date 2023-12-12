@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-//#include "../components/button/button_headers.h"
-//#include "../components/dwm1001/dwm1001_main.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
@@ -201,6 +199,8 @@ void app_main(void){
                 return;
             }
             blufi_deinit_task_init();
+            setBlueEventGroup(bluetooth_deinit_event_group);
+            setBlueDeinitBit(BLUETOOTH_DEINIT_BIT);
             blufi_init();
         }
 	    else esp_bt_mem_release(ESP_BT_MODE_BTDM);

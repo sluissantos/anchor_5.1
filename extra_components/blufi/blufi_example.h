@@ -31,6 +31,8 @@ esp_err_t esp_blufi_host_deinit(void);
 void blufi_init(void);
 void initialise_wifi(void);
 EventGroupHandle_t getWifiEventGroup(void);
+void setBlueEventGroup(EventGroupHandle_t event);
+void setBlueDeinitBit(int BLUETOOTH_DEINIT_BIT);
 
 typedef struct {
 

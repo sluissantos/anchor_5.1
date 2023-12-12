@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "warehouse_anchor_esp",
-    "project_version":    "6a048c1-dirty",
+    "project_version":    "fd60216-dirty",
     "project_path":       "/home/santos/Documentos/blufi",
     "idf_path":           "/home/santos/esp/esp-idf",
     "build_dir":          "/home/santos/Documentos/blufi/build",

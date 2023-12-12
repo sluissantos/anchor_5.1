@@ -96,18 +96,24 @@ esp_err_t config_hostname(void) {
     esp_err_t err;
     char hostname[64];
 
-    if (factory_config.mem_read_err == ESP_OK) {
+    static esp_netif_t *sta_netif = NULL;
+
+    if (!sta_netif) {
+        sta_netif = esp_netif_create_default_wifi_sta();
+        if (!sta_netif) {
+            ESP_LOGE(TAG, "Failed to create default STA netif");
+            return ESP_FAIL;
+        }
+    }
+
+    if (factory_config.mem_read_err == ESP_OK){
         uint8_t wifi_sta_mac_addr[6];
         err = esp_wifi_get_mac(ESP_IF_WIFI_STA, wifi_sta_mac_addr);
-
         // HOSTNAME:
         ESP_LOGI(TAG, "Writing Hostname ... ");
         sprintf(hostname, ""HOSTNAME_PREFIX_WIFI"-%02X%02X%02X", wifi_sta_mac_addr[3], wifi_sta_mac_addr[4], wifi_sta_mac_addr[5]);
-
-        esp_netif_config_t netif_config = ESP_NETIF_DEFAULT_WIFI_STA();
-        esp_netif_t *sta_netif = esp_netif_create_default_wifi_sta();
+        // Configure o hostname
         err = esp_netif_set_hostname(sta_netif, hostname);
-
         if (err != ESP_OK) {
             ESP_LOGE(TAG, "Error (%s) setting Hostname", esp_err_to_name(err));
             return err;
@@ -116,8 +122,9 @@ esp_err_t config_hostname(void) {
         return factory_config.mem_read_err;
     }
 
-    return err;
+    return ESP_OK;
 }
+
 
 esp_err_t factory_init_data(void){
 	esp_err_t err;
